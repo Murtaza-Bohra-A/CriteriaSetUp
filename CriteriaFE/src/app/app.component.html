@@ -1,0 +1,59 @@
+<div class="container-fluid">
+  <div class="row">
+
+    <!-- Sidebar: col-2 -->
+    <div class="col-2 side-navbar bg-dark text-white min-vh-100">
+      <div class="logo py-3">
+        <h4 href="#">AR Module</h4>
+      </div>
+      <nav>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2">
+            <a routerLink="/CriteriaSetup" routerLinkActive="active" class="nav-link text-white">
+              <i class="fas fa-home me-2"></i>
+              Criteria Setup
+            </a>
+          </li>
+          <li class="nav-item mb-2">
+            <a href="#" class="nav-link text-white">
+              <i class="fas fa-chart-bar me-2"></i>
+              Analytics
+            </a>
+          </li>
+          <li class="nav-item mb-2">
+            <a href="#" class="nav-link text-white">
+              <i class="fas fa-file-alt me-2"></i>
+              Reports
+            </a>
+          </li>
+          <li class="nav-item mb-2">
+            <a href="#" class="nav-link text-white">
+              <i class="fas fa-cog me-2"></i>
+              Settings
+            </a>
+          </li>
+          <li class="nav-item mb-2">
+            <a href="#" class="nav-link text-white">
+              <i class="fas fa-user me-2"></i>
+              Profile
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div class="mt-auto p-3">
+        <a href="#" class="nav-link text-white">
+          <i class="fas fa-sign-out-alt me-2"></i>
+          Logout
+        </a>
+      </div>
+    </div>
+
+    <!-- Main Content: col-10 -->
+    <div class="col-10 p-4">
+      <main>
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+
+  </div>
+</div>
