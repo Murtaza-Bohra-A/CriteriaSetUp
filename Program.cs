@@ -24,7 +24,21 @@ namespace CriteriaSetUp_BE
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin",
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:0099")
+                               .AllowAnyHeader()
+                               .AllowAnyMethod();
+                    });
+            }); 
+
+            builder.Services.AddControllers();
+
             var app = builder.Build();
+            app.UseCors("AllowSpecificOrigin");
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
