@@ -18,3 +18,18 @@
 .button-item {
   margin-top: 20px; /* align button with inputs */
 }
+
+/* White button for black background table */
+.custom-white-btn .p-button {
+  background-color: #fff !important; /* White background */
+  color: #000 !important; /* Black icon/text */
+  border: 1px solid #ccc !important; /* Light border */
+  border-radius: 50% !important; /* Round buttons */
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+}
+
+.custom-white-btn .p-button:hover {
+  background-color: #ddd !important; /* Slightly gray on hover */
+}

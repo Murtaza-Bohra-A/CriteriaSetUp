@@ -32,17 +32,33 @@ export class CriteriaComponent {
 
   loadCriteriatable() {
     this.criteria = [
-      {
+      {id:1,
         name: "Murtaza",
         code: 1234,
         category: "Demo",
         quantity: 1
       }, {
+        id: 2,
         name: "Murtaza",
         code: 1234,
         category: "Demo",
         quantity: 1
-      }
+      },
+      { id: 3, code: 'SRC1', name: 'Criteria A', category: 'Cat1', quantity: 10 },
+      { id: 4, code: 'SRC2', name: 'Criteria B', category: 'Cat2', quantity: 25 },
+      { id: 5, code: 'SRC3', name: 'Criteria C', category: 'Cat3', quantity: 40 }
     ]
   }
+
+  onEditCriteria(criteria: any) {
+    console.log('Edit clicked:', criteria);
+    // Your edit logic here
+  }
+
+  onDeleteCriteria(criteria: any) {
+    this.criteria = this.criteria.filter(c => c.id !== criteria.id);
+    console.log('Delete clicked:', criteria);
+    // Your delete logic here
+  }
+
 }
