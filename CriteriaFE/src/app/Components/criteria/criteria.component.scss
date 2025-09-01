@@ -1,0 +1,20 @@
+.form-inline {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* space between items */
+}
+
+.form-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-item label {
+  font-size: 14px;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.button-item {
+  margin-top: 20px; /* align button with inputs */
+}

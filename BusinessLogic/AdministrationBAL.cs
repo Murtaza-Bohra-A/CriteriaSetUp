@@ -33,5 +33,22 @@ namespace CriteriaSetUp_BE.BusinessLogic
                 throw new Exception(ex.Message, ex);
             }
         }
+
+        public Result<List<CriteriaStatus>> GetCriteriaStatuses(CriteriaStatus req)
+        {
+            try
+            {
+                return new Result<List<CriteriaStatus>>
+                {
+                    Status = true,
+                    Data = _dataService.GetCriteriaStatuses(req)
+
+                };
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+        }
     }
 }

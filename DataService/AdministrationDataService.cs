@@ -52,6 +52,43 @@ namespace CriteriaSetUp_BE.DataService
             }
         }
 
+        public List<CriteriaStatus> GetCriteriaStatuses(CriteriaStatus req)
+        {
+            List<CriteriaStatus> result = new List<CriteriaStatus>();
+            string connectionString = _configuration.GetConnectionString("DefaultConnection");
+            //_configuration.GetConnectionString(_configuration.GetConnectionString("DefaultConnection"));
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("[dbo].[sp_CriteriaStatuses_Get]", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@ID", req.ID);
+                    cmd.Parameters.AddWithValue("@CriteriaStatusID", req.CriteriaStatusID);
+                    cmd.Parameters.AddWithValue("@Source", req.Source);
+                    cmd.Parameters.AddWithValue("@StatusDescription", req.StatusDescription);
+
+                    con.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            CriteriaStatus module = new CriteriaStatus
+                            {
+                                ID = Convert.ToInt32(reader["ID"]),
+                                Source = reader["Source"].ToString(),
+                                CriteriaStatusID = reader["CriteriaStatusID"].ToString(),
+                                StatusDescription = reader["StatusDescription"].ToString()
+                                // Add all properties
+                            };
+                            result.Add(module);
+                        }
+                    }
+                }
+                return result;
+            } 
+        }
+
     }
 
 

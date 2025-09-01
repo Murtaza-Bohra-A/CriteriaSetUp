@@ -1,24 +1,34 @@
-<p>criteria work</p>
-<div>
-  <label>Source</label>
-  <div class="card flex justify-center">
-    <input type="text" pInputText [(ngModel)]="Source" />
+<div class="form-inline">
+  <div class="form-item">
+    <label for="source">Source</label>
+    <p-dropdown id="source"
+                [options]="sources"
+                [(ngModel)]="Source"
+                placeholder="Select Source">
+    </p-dropdown>
   </div>
 
-  <label>Criteria</label>
-  <div class="card flex justify-center">
-    <input type="text" pInputText [(ngModel)]="Criteria" />
+  <div class="form-item">
+    <label for="criteria">Criteria</label>
+    <input id="criteria"
+           type="text"
+           pInputText
+           [(ngModel)]="Criteria" />
   </div>
 
-  <p-button label="Submit" (click)="loadCriteriatable()"/>
+  <div class="form-item button-item">
+    <p-button label="Submit"
+              (click)="loadCriteriatable()">
+    </p-button>
+  </div>
 </div>
-<br />
+<br/>
 <!--Criteria Table-->
 
-<p-table [value]="products" [tableStyle]="{ 'min-width': '50rem' }">
+<p-table [value]="criteria" [tableStyle]="{ 'min-width': '50rem' }">
   <ng-template #header>
     <tr>
-      
+
       <th>Source</th>
       <th>Criteria</th>
       <th>Category</th>
@@ -27,7 +37,7 @@
   </ng-template>
   <ng-template #body let-product>
     <tr>
-      
+
       <td>{{ product.code }}</td>
       <td>{{ product.name }}</td>
       <td>{{ product.category }}</td>

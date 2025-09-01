@@ -8,21 +8,30 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
+import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
   selector: 'app-criteria',
-  imports: [FormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule, FloatLabelModule, ButtonModule, TableModule, CommonModule],
+  imports: [FormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule, FloatLabelModule, ButtonModule, TableModule, CommonModule, DropdownModule],
   templateUrl: './criteria.component.html',
   styleUrl: './criteria.component.scss'
 })
 export class CriteriaComponent {
-  Source: string = ""
+  Source: any;   // bound value
+
+  sources = [
+    { label: 'Database', value: 'DB' },
+    { label: 'API', value: 'API' },
+    { label: 'File Upload', value: 'FILE' }
+  ];
+
+
   Criteria: string = ""
   srNo: number = 0;
-  products: any[] = [];
+  criteria: any[] = [];
 
   loadCriteriatable() {
-   this.products = [
+    this.criteria = [
       {
         name: "Murtaza",
         code: 1234,

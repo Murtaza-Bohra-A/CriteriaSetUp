@@ -29,6 +29,34 @@ namespace CriteriaSetUp_BE.Controllers
                 return BadRequest(new Result<object> { Status = false, Message = ex.Message });
             }
         }
+
+        [HttpGet("GetCriteriaStatuses")]
+        public IActionResult GetCriteriaStatuses(CriteriaStatus req)
+        {
+            try
+            {
+                return Ok(_administrationBAL.GetCriteriaStatuses(req));
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it as needed
+                return BadRequest(new Result<object> { Status = false, Message = ex.Message });
+            }
+        }
+
+        //[HttpGet("GetAvailModule")]
+        //public IActionResult GetAvailModule(CriteriaStatus req)
+        //{
+        //    try
+        //    {
+        //        return Ok(_administrationBAL.GetAvailModule(req));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Log the exception or handle it as needed
+        //        return BadRequest(new Result<object> { Status = false, Message = ex.Message });
+        //    }
+        //}
     }
 }
 
