@@ -9,10 +9,11 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
 import { DropdownModule } from 'primeng/dropdown';
-
+import { DialogModule } from 'primeng/dialog';
 @Component({
   selector: 'app-criteria',
-  imports: [FormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule, FloatLabelModule, ButtonModule, TableModule, CommonModule, DropdownModule],
+  imports: [FormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule, FloatLabelModule, ButtonModule, TableModule, CommonModule,
+    DropdownModule,DialogModule],
   templateUrl: './criteria.component.html',
   styleUrl: './criteria.component.scss'
 })
@@ -25,7 +26,8 @@ export class CriteriaComponent {
     { label: 'File Upload', value: 'FILE' }
   ];
 
-
+  displayEditDialog: boolean = false;  // controls dialog visibility
+  selectedCriteria: any = {};           // store selected row
   Criteria: string = ""
   srNo: number = 0;
   criteria: any[] = [];
@@ -53,6 +55,15 @@ export class CriteriaComponent {
   onEditCriteria(criteria: any) {
     console.log('Edit clicked:', criteria);
     // Your edit logic here
+    this.selectedCriteria = { ...criteria }; // Clone the selected criteria
+    this.displayEditDialog = true; // Show the dialog
+  }
+  saveEdit() {
+    const index = this.criteria.findIndex(c => c.id === this.selectedCriteria.id);
+    if (index !== -1) {
+      this.criteria[index] = { ...this.selectedCriteria };
+    }
+    this.displayEditDialog = false;
   }
 
   onDeleteCriteria(criteria: any) {

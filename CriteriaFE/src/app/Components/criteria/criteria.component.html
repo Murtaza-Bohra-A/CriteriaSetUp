@@ -22,7 +22,7 @@
     </p-button>
   </div>
 </div>
-<br/>
+<br />
 <!--Criteria Table-->
 
 <p-table [value]="criteria" [tableStyle]="{ 'min-width': '50rem' }">
@@ -44,9 +44,36 @@
       <td>{{ criteria.category }}</td>
       <td>{{ criteria.quantity }}</td>
       <td>
-        <p-button icon="pi pi-pencil"  styleClass="custom-white-btn" (click)="onEditCriteria(criteria)"></p-button>
-        <p-button icon="pi pi-trash"  styleClass="custom-white-btn" (click)="onDeleteCriteria(criteria)"></p-button>
+        <p-button icon="pi pi-pencil" styleClass="custom-white-btn" (click)="onEditCriteria(criteria)"></p-button>
+        <p-button icon="pi pi-trash" styleClass="custom-white-btn" (click)="onDeleteCriteria(criteria)"></p-button>
       </td>
     </tr>
   </ng-template>
 </p-table>
+
+<!-- Edit Dialog -->
+<p-dialog header="Edit Criteria" [(visible)]="displayEditDialog" [modal]="true" [style]="{width: '30vw'}">
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="code">Source</label>
+      <input id="code" type="text" pInputText [(ngModel)]="selectedCriteria.code" />
+    </div>
+    <div class="p-field">
+      <label for="name">Criteria</label>
+      <input id="name" type="text" pInputText [(ngModel)]="selectedCriteria.name" />
+    </div>
+    <div class="p-field">
+      <label for="category">Category</label>
+      <input id="category" type="text" pInputText [(ngModel)]="selectedCriteria.category" />
+    </div>
+    <div class="p-field">
+      <label for="quantity">Quantity</label>
+      <input id="quantity" type="number" pInputText [(ngModel)]="selectedCriteria.quantity" />
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <p-button label="Cancel" icon="pi pi-times" (click)="displayEditDialog=false"></p-button>
+    <p-button label="Save" icon="pi pi-check" (click)="saveEdit()" [styleClass]="'p-button-success'"></p-button>
+  </ng-template>
+</p-dialog>
