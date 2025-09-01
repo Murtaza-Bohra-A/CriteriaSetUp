@@ -2,13 +2,36 @@
 <div>
   <label>Source</label>
   <div class="card flex justify-center">
-    <input type="text" pInputText [(ngModel)]="value" />
+    <input type="text" pInputText [(ngModel)]="Source" />
   </div>
 
   <label>Criteria</label>
   <div class="card flex justify-center">
-    <input type="text" pInputText [(ngModel)]="value" />
+    <input type="text" pInputText [(ngModel)]="Criteria" />
   </div>
 
-  <p-button label="Submit" />
+  <p-button label="Submit" (click)="loadCriteriatable()"/>
 </div>
+<br />
+<!--Criteria Table-->
+
+<p-table [value]="products" [tableStyle]="{ 'min-width': '50rem' }">
+  <ng-template #header>
+    <tr>
+      
+      <th>Source</th>
+      <th>Criteria</th>
+      <th>Category</th>
+      <th>Quantity</th>
+    </tr>
+  </ng-template>
+  <ng-template #body let-product>
+    <tr>
+      
+      <td>{{ product.code }}</td>
+      <td>{{ product.name }}</td>
+      <td>{{ product.category }}</td>
+      <td>{{ product.quantity }}</td>
+    </tr>
+  </ng-template>
+</p-table>
