@@ -48,7 +48,7 @@ export class CriteriaComponent {
       },
       { id: 3, code: 'SRC1', name: 'Criteria A', category: 'Cat1', quantity: 10 },
       { id: 4, code: 'SRC2', name: 'Criteria B', category: 'Cat2', quantity: 25 },
-      { id: 5, code: 'SRC3', name: 'Criteria C', category: 'Cat3', quantity: 40 }
+      
     ]
   }
 
