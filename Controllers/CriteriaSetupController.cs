@@ -16,7 +16,7 @@ namespace CriteriaSetUp_BE.Controllers
         }
 
         // Getting Avail Modules
-        [HttpGet("GetCriteriaStatus")]
+        [HttpPost("MurtazaAPI/GetCriteriaStatus")]
         public IActionResult GetCriteriaStatus(CriteriaStatus req)
         {
             try
@@ -30,7 +30,7 @@ namespace CriteriaSetUp_BE.Controllers
             }
         }
 
-        [HttpGet("GetCriteriaStatuses")]
+        [HttpPost("MurtazaAPI/GetCriteriaStatuses")]
         public IActionResult GetCriteriaStatuses(CriteriaStatus req)
         {
             try
@@ -44,7 +44,7 @@ namespace CriteriaSetUp_BE.Controllers
             }
         }
 
-        [HttpGet("GetCriteriaModule")]
+        [HttpPost("MurtazaAPI/GetCriteriaModule")]
         public IActionResult GetAvailModule(CriteriaModule req)
         {
             try

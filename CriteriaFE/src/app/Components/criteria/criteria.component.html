@@ -3,17 +3,18 @@
     <label for="source">Source</label>
     <p-dropdown id="source"
                 [options]="sources"
-                [(ngModel)]="Source"
+                [(ngModel)]="SelectedSource"
                 placeholder="Select Source">
     </p-dropdown>
   </div>
 
   <div class="form-item">
     <label for="criteria">Criteria</label>
-    <input id="criteria"
-           type="text"
-           pInputText
-           [(ngModel)]="Criteria" />
+    <p-dropdown id="source"
+                [options]="Criteria"
+                [(ngModel)]="selectedCriteria"
+                placeholder="Select Source">
+    </p-dropdown>
   </div>
 
   <div class="form-item button-item">

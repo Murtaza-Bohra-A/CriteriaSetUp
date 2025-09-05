@@ -119,7 +119,8 @@ namespace CriteriaSetUp_BE.DataService
                             };
                             result.Add(module);
                         }
-  
+                    }
+                }
                 return result;
             }
         }

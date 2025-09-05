@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
@@ -10,6 +10,7 @@ import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
 import { DropdownModule } from 'primeng/dropdown';
 import { DialogModule } from 'primeng/dialog';
+import { HttpServiceService } from '../../services/http-service.service';
 @Component({
   selector: 'app-criteria',
   imports: [FormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule, FloatLabelModule, ButtonModule, TableModule, CommonModule,
@@ -17,22 +18,35 @@ import { DialogModule } from 'primeng/dialog';
   templateUrl: './criteria.component.html',
   styleUrl: './criteria.component.scss'
 })
-export class CriteriaComponent {
-  Source: any;   // bound value
-
-  sources = [
-    { label: 'Database', value: 'DB' },
-    { label: 'API', value: 'API' },
-    { label: 'File Upload', value: 'FILE' }
-  ];
-
+export class CriteriaComponent implements OnInit {
+  SelectedSource: any;   // bound value
+  sources = [];
+  Criteria = [];
   displayEditDialog: boolean = false;  // controls dialog visibility
   selectedCriteria: any = {};           // store selected row
-  Criteria: string = ""
+  
   srNo: number = 0;
   criteria: any[] = [];
+  constructor(private apiService: HttpServiceService) { }
 
+  ngOnInit() {
+    this.apiService.Post("MurtazaAPI/GetCriteriaModule", null).subscribe({
+      next: (res) => {
+        this.sources = res.data.map((s: any) => s.source)
+        this.Criteria = res.data.map((s: any) => s.criteria)
+        console.log(this.criteria);
+      },
+      error: (err) => {
+        console.error('Error fetching data', err);
+      }
+    })
+  }
+  ClearInput() {
+    this.selectedCriteria = ""
+    this.SelectedSource = ""
+  }
   loadCriteriatable() {
+    this.ClearInput();
     this.criteria = [
       {id:1,
         name: "Murtaza",

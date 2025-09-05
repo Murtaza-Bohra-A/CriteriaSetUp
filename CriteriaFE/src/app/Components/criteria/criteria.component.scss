@@ -33,3 +33,6 @@
 .custom-white-btn .p-button:hover {
   background-color: #ddd !important; /* Slightly gray on hover */
 }
+::ng-deep .p-dropdown {
+  width: 250px !important;
+}
