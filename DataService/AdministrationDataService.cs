@@ -52,9 +52,9 @@ namespace CriteriaSetUp_BE.DataService
             }
         }
 
-        public List<CriteriaStatus> GetCriteriaStatuses(CriteriaStatus req)
+        public List<CriteriaStatuses> GetCriteriaStatuses(CriteriaStatuses req)
         {
-            List<CriteriaStatus> result = new List<CriteriaStatus>();
+            List<CriteriaStatuses> result = new List<CriteriaStatuses>();
             string connectionString = _configuration.GetConnectionString("DefaultConnection");
             //_configuration.GetConnectionString(_configuration.GetConnectionString("DefaultConnection"));
 
@@ -63,22 +63,33 @@ namespace CriteriaSetUp_BE.DataService
                 using (SqlCommand cmd = new SqlCommand("[dbo].[sp_CriteriaStatuses_Get]", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@ID", req.ID);
-                    cmd.Parameters.AddWithValue("@CriteriaStatusID", req.CriteriaStatusID);
-                    cmd.Parameters.AddWithValue("@Source", req.Source);
-                    cmd.Parameters.AddWithValue("@StatusDescription", req.StatusDescription);
+                    cmd.Parameters.AddWithValue("@ID", (object?)req?.ID ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Source", (object?)req?.Source ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@isActive", (object?)req?.isActive ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@StatusName", (object?)req?.StatusName ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Criteria", (object?)req?.Criteria ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@FeatureName", (object?)req?.FeatureName ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@CreatedBy", (object?)req?.CreatedBy ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@CreatedDate", (object?)req?.CreatedDate ?? DBNull.Value);
+
+
 
                     con.Open();
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            CriteriaStatus module = new CriteriaStatus
+                            CriteriaStatuses module = new CriteriaStatuses
                             {
-                                ID = Convert.ToInt32(reader["ID"]),
-                                Source = reader["Source"].ToString(),
-                                CriteriaStatusID = reader["CriteriaStatusID"].ToString(),
-                                StatusDescription = reader["StatusDescription"].ToString()
+                                ID = reader["ID"] != DBNull.Value ? Convert.ToInt32(reader["ID"]) : 0,
+                                Source = reader["Source"] != DBNull.Value ? reader["Source"].ToString() : null,
+                                isActive = reader["isActive"] != DBNull.Value ? Convert.ToBoolean(reader["isActive"]) : false,
+                                StatusName = reader["StatusName"] != DBNull.Value ? reader["StatusName"].ToString() : null,
+                                Criteria = reader["Criteria"] != DBNull.Value ? reader["Criteria"].ToString() : null,
+                                FeatureName = reader["FeatureName"] != DBNull.Value ? reader["FeatureName"].ToString() : null,
+                                CreatedBy = reader["CreatedBy"] != DBNull.Value ? reader["CreatedBy"].ToString() : null,
+                                CreatedDate = reader["CreatedDate"] != DBNull.Value ? Convert.ToDateTime(reader["CreatedDate"]) : (DateTime?)null
+
                                 // Add all properties
                             };
                             result.Add(module);

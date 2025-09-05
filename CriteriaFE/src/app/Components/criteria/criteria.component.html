@@ -26,27 +26,32 @@
 <br />
 <!--Criteria Table-->
 
-<p-table [value]="criteria" [tableStyle]="{ 'min-width': '50rem' }">
+<p-table [value]="criteriaTable" [tableStyle]="{ 'min-width': '50rem' }">
   <ng-template #header>
     <tr>
-
       <th>Source</th>
+      <th>isActive</th>
+      <th>Status Name</th>
       <th>Criteria</th>
-      <th>Category</th>
-      <th>Quantity</th>
+      <th>Feature Name</th>
+      <th>Created By</th>
+      <th>Created Date</th>
       <th>Action</th>
     </tr>
   </ng-template>
-  <ng-template #body let-criteria>
+  <ng-template #body let-criteriaTable>
     <tr>
 
-      <td>{{ criteria.code }}</td>
-      <td>{{ criteria.name }}</td>
-      <td>{{ criteria.category }}</td>
-      <td>{{ criteria.quantity }}</td>
+      <td>{{ criteriaTable.source }}</td>
+      <td><input type="checkbox" [checked]="criteriaTable.isActive" /></td>
+      <td>{{ criteriaTable.statusName }}</td>
+      <td>{{ criteriaTable.criteria }}</td>
+      <td>{{ criteriaTable.featureName }}</td>
+      <td>{{ criteriaTable.createdBy }}</td>
+      <td>{{ criteriaTable.createdDate}}</td>
       <td>
-        <p-button icon="pi pi-pencil" styleClass="custom-white-btn" (click)="onEditCriteria(criteria)"></p-button>
-        <p-button icon="pi pi-trash" styleClass="custom-white-btn" (click)="onDeleteCriteria(criteria)"></p-button>
+        <p-button icon="pi pi-pencil" styleClass="custom-white-btn" (click)="onEditCriteria(criteriaTable)"></p-button>
+        <p-button icon="pi pi-trash" styleClass="custom-white-btn" (click)="onDeleteCriteria(criteriaTable)"></p-button>
       </td>
     </tr>
   </ng-template>

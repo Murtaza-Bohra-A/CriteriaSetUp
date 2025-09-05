@@ -33,7 +33,7 @@ namespace CriteriaSetUp_BE
                                .AllowAnyHeader()
                                .AllowAnyMethod();
                     });
-            }); 
+            });
 
             builder.Services.AddControllers();
 

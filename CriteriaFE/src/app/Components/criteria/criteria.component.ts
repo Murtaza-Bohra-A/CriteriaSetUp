@@ -26,7 +26,7 @@ export class CriteriaComponent implements OnInit {
   selectedCriteria: any = {};           // store selected row
   
   srNo: number = 0;
-  criteria: any[] = [];
+  criteriaTable: any = {};
   constructor(private apiService: HttpServiceService) { }
 
   ngOnInit() {
@@ -34,7 +34,7 @@ export class CriteriaComponent implements OnInit {
       next: (res) => {
         this.sources = res.data.map((s: any) => s.source)
         this.Criteria = res.data.map((s: any) => s.criteria)
-        console.log(this.criteria);
+        console.log(this.Criteria);
       },
       error: (err) => {
         console.error('Error fetching data', err);
@@ -46,8 +46,30 @@ export class CriteriaComponent implements OnInit {
     this.SelectedSource = ""
   }
   loadCriteriatable() {
-    this.ClearInput();
-    this.criteria = [
+   
+    var obj = {
+      ID: null,
+      Source: this.SelectedSource ?? null,
+      isActive: null,
+      StatusName: null,
+      Criteria: this.selectedCriteria ?? null,
+      FeatureName: null,
+      CreatedBy: null,
+      CreatedDate: null
+    };
+    this.apiService.Post("MurtazaAPI/GetCriteriaStatuses", obj).subscribe({
+      next: (res) => {
+        this.criteriaTable = res.data
+        console.log("Criteria Table Data", this.criteriaTable);
+        this.ClearInput();
+      },
+      error: (err) => {
+        console.error('Error fetching data', err);
+        this.ClearInput();
+      }
+    })
+    
+    this.criteriaTable = [
       {id:1,
         name: "Murtaza",
         code: 1234,
@@ -73,15 +95,15 @@ export class CriteriaComponent implements OnInit {
     this.displayEditDialog = true; // Show the dialog
   }
   saveEdit() {
-    const index = this.criteria.findIndex(c => c.id === this.selectedCriteria.id);
-    if (index !== -1) {
-      this.criteria[index] = { ...this.selectedCriteria };
-    }
+    //const index = this.criteriaTable.findIndex(c => c.id === this.selectedCriteria.id);
+    //if (index !== -1) {
+    //  this.criteriaTable[index] = { ...this.selectedCriteria };
+    //}
     this.displayEditDialog = false;
   }
 
   onDeleteCriteria(criteria: any) {
-    this.criteria = this.criteria.filter(c => c.id !== criteria.id);
+  //  this.criteriaTable = this.criteriaTable.filter(c => c.id !== criteria.id);
     console.log('Delete clicked:', criteria);
     // Your delete logic here
   }

@@ -31,7 +31,7 @@ namespace CriteriaSetUp_BE.Controllers
         }
 
         [HttpPost("MurtazaAPI/GetCriteriaStatuses")]
-        public IActionResult GetCriteriaStatuses(CriteriaStatus req)
+        public IActionResult GetCriteriaStatuses([FromBody] CriteriaStatuses req)
         {
             try
             {

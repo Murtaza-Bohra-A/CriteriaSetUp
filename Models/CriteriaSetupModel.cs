@@ -16,7 +16,7 @@ namespace CriteriaSetUp_BE.Models
     }
     public class CriteriaStatuses
     {
-        public int? Id { get; set; }
+        public int? ID { get; set; }
         public string? Source { get; set; }
         public bool? isActive { get; set; }
         public string? StatusName { get; set; }

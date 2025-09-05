@@ -34,11 +34,11 @@ namespace CriteriaSetUp_BE.BusinessLogic
             }
         }
 
-        public Result<List<CriteriaStatus>> GetCriteriaStatuses(CriteriaStatus req)
+        public Result<List<CriteriaStatuses>> GetCriteriaStatuses(CriteriaStatuses req)
         {
             try
             {
-                return new Result<List<CriteriaStatus>>
+                return new Result<List<CriteriaStatuses>>
                 {
                     Status = true,
                     Data = _dataService.GetCriteriaStatuses(req)
