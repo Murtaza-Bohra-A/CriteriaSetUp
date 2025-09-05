@@ -58,28 +58,115 @@
 </p-table>
 
 <!-- Edit Dialog -->
-<p-dialog header="Edit Criteria" [(visible)]="displayEditDialog" [modal]="true" [style]="{width: '30vw'}">
-  <div class="p-fluid">
-    <div class="p-field">
-      <label for="code">Source</label>
-      <input id="code" type="text" pInputText [(ngModel)]="selectedCriteria.code" />
+<p-dialog header="Edit Criteria"
+          [(visible)]="displayEditDialog"
+          [modal]="true"
+          [style]="{width: '35vw'}"
+          [draggable]="false"
+          [resizable]="false">
+  <form [formGroup]="editForm" class="p-fluid grid gap-3 p-3">
+
+    <div class="col-12">
+      <label for="source" class="font-medium">Source <span class="text-red-500">*</span></label>
+      <input id="source"
+             type="text"
+             pInputText
+             formControlName="source"
+             placeholder="Enter source"
+             class="w-full" />
+      <small *ngIf="editForm.controls['source'].invalid && editForm.controls['source'].touched" class="text-red-500">
+        Source is required
+      </small>
     </div>
-    <div class="p-field">
-      <label for="name">Criteria</label>
-      <input id="name" type="text" pInputText [(ngModel)]="selectedCriteria.name" />
+
+    <div class="col-12">
+      <label for="criteria" class="font-medium">Criteria <span class="text-red-500">*</span></label>
+      <input id="criteria"
+             type="text"
+             pInputText
+             formControlName="criteria"
+             placeholder="Enter criteria"
+             class="w-full" />
+      <small *ngIf="editForm.controls['criteria'].invalid && editForm.controls['criteria'].touched" class="text-red-500">
+        Criteria is required
+      </small>
     </div>
-    <div class="p-field">
-      <label for="category">Category</label>
-      <input id="category" type="text" pInputText [(ngModel)]="selectedCriteria.category" />
+
+    <div class="col-12">
+      <label for="statusName" class="font-medium">Status Name</label>
+      <input id="statusName"
+             type="text"
+             pInputText
+             formControlName="statusName"
+             placeholder="Enter status Name"
+             class="w-full" />
+      <small *ngIf="editForm.controls['statusName'].invalid && editForm.controls['statusName'].touched" class="text-red-500">
+        Status Name is Required
+      </small>
     </div>
-    <div class="p-field">
-      <label for="quantity">Quantity</label>
-      <input id="quantity" type="number" pInputText [(ngModel)]="selectedCriteria.quantity" />
+
+    <div class="col-12">
+      <label for="createdBy" class="font-medium">Created By</label>
+      <input id="createdBy"
+             type="text"
+             pInputText
+             formControlName="createdBy"
+             placeholder="Enter createdBy"
+             class="w-full" />
+      <small *ngIf="editForm.controls['createdBy'].invalid && editForm.controls['createdBy'].touched" class="text-red-500">
+        Created By is Required
+      </small>
     </div>
-  </div>
+
+    <div class="col-12">
+      <label for="createdDate" class="font-medium">Created Date</label>
+      <input id="createdDate"
+             type="datetime"
+             pInputText
+             formControlName="createdDate"
+             placeholder="Enter createdDate"
+             class="w-full" />
+      <small *ngIf="editForm.controls['createdDate'].invalid && editForm.controls['createdDate'].touched" class="text-red-500">
+        Created Date is Required
+      </small>
+    </div>
+
+    <div class="col-12">
+      <label for="featureName" class="font-medium">Feature Name</label>
+      <input id="featureName"
+             type="text"
+             pInputText
+             formControlName="featureName"
+             placeholder="Enter featureName"
+             class="w-full" />
+      <small *ngIf="editForm.controls['featureName'].invalid && editForm.controls['featureName'].touched" class="text-red-500">
+        Feature Name is Required
+      </small>
+    </div>
+
+    <div class="col-12 flex align-items-center gap-2">
+      <p-checkbox formControlName="isActive"
+                  [binary]="true"
+                  inputId="isActive"></p-checkbox>
+      <label for="isActive">Active</label>
+    </div>
+
+  </form>
 
   <ng-template pTemplate="footer">
-    <p-button label="Cancel" icon="pi pi-times" (click)="displayEditDialog=false"></p-button>
-    <p-button label="Save" icon="pi pi-check" (click)="saveEdit()" [styleClass]="'p-button-success'"></p-button>
+    <div class="flex justify-content-end gap-2">
+      <p-button label="Cancel"
+                icon="pi pi-times"
+                severity="secondary"
+                (click)="displayEditDialog=false">
+      </p-button>
+
+      <p-button label="Save"
+                icon="pi pi-check"
+                severity="success"
+                (click)="saveEdit()"
+                [disabled]="editForm.invalid">
+      </p-button>
+    </div>
   </ng-template>
 </p-dialog>

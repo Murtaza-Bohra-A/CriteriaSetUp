@@ -33,7 +33,7 @@ namespace CriteriaSetUp_BE.BusinessLogic
                 throw new Exception(ex.Message, ex);
             }
         }
-
+        
         public Result<List<CriteriaStatuses>> GetCriteriaStatuses(CriteriaStatuses req)
         {
             try
@@ -49,6 +49,11 @@ namespace CriteriaSetUp_BE.BusinessLogic
             {
                 throw new Exception(ex.Message, ex);
             }
+        }
+
+        public string DeleteCriteriaStatus(int id)
+        {
+            return _dataService.DeleteCriteriaStatus(id);
         }
 
         public Result<List<CriteriaModule>> GetAvailModule(CriteriaModule req)

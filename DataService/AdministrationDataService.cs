@@ -51,7 +51,7 @@ namespace CriteriaSetUp_BE.DataService
                 return result;
             }
         }
-
+        
         public List<CriteriaStatuses> GetCriteriaStatuses(CriteriaStatuses req)
         {
             List<CriteriaStatuses> result = new List<CriteriaStatuses>();
@@ -99,6 +99,30 @@ namespace CriteriaSetUp_BE.DataService
                 return result;
             } 
         }
+
+        public string DeleteCriteriaStatus(int id)
+        {
+            if (id <= 0) throw new ArgumentException("ID must be greater than 0", nameof(id));
+
+            string message = string.Empty;
+            string connectionString = _configuration.GetConnectionString("DefaultConnection");
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand("[dbo].[sp_CriteriaStatuses_Delete]", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@ID", id);
+
+                con.Open();
+                var result = cmd.ExecuteScalar(); // procedure returns a message
+                con.Close();
+
+                message = result?.ToString() ?? "No response from database";
+            }
+
+            return message;
+        }
+
 
         public List<CriteriaModule> GetAvailModule(CriteriaModule req)
         {

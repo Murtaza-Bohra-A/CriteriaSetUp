@@ -44,6 +44,21 @@ namespace CriteriaSetUp_BE.Controllers
             }
         }
 
+        [HttpDelete("MurtazaAPI/DeleteCriteriaStatus/{id}")]
+        public IActionResult DeleteCriteriaStatus(int id)
+        {
+            try
+            {
+                var msg = _administrationBAL.DeleteCriteriaStatus(id);
+                return Ok(new { Status = true, Message = msg });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Status = false, Message = ex.Message });
+            }
+        }
+
+
         [HttpPost("MurtazaAPI/GetCriteriaModule")]
         public IActionResult GetAvailModule(CriteriaModule req)
         {

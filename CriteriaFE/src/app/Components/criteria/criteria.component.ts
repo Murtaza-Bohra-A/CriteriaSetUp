@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputTextModule } from 'primeng/inputtext';
@@ -11,10 +11,12 @@ import { CommonModule } from '@angular/common';
 import { DropdownModule } from 'primeng/dropdown';
 import { DialogModule } from 'primeng/dialog';
 import { HttpServiceService } from '../../services/http-service.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CheckboxModule } from 'primeng/checkbox';
 @Component({
   selector: 'app-criteria',
   imports: [FormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule, FloatLabelModule, ButtonModule, TableModule, CommonModule,
-    DropdownModule,DialogModule],
+    DropdownModule, ReactiveFormsModule, DialogModule, InputNumberModule, CheckboxModule],
   templateUrl: './criteria.component.html',
   styleUrl: './criteria.component.scss'
 })
@@ -24,10 +26,20 @@ export class CriteriaComponent implements OnInit {
   Criteria = [];
   displayEditDialog: boolean = false;  // controls dialog visibility
   selectedCriteria: any = {};           // store selected row
-  
+  editForm!: FormGroup;
   srNo: number = 0;
   criteriaTable: any = {};
-  constructor(private apiService: HttpServiceService) { }
+  constructor(private apiService: HttpServiceService, private fb: FormBuilder) {
+    this.editForm = this.fb.group({
+      source: ['', Validators.required],
+      criteria: ['', Validators.required],
+      statusName: ['',  Validators.required],
+      createdBy: [null, [Validators.required]],
+      isActive: [false],
+      createdDate: ['', Validators.required],
+      featureName: ['', [Validators.required]]
+    });
+}
 
   ngOnInit() {
     this.apiService.Post("MurtazaAPI/GetCriteriaModule", null).subscribe({
@@ -93,13 +105,22 @@ export class CriteriaComponent implements OnInit {
     // Your edit logic here
     this.selectedCriteria = { ...criteria }; // Clone the selected criteria
     this.displayEditDialog = true; // Show the dialog
+    if (criteria) {
+      this.editForm.patchValue(criteria);
+    } else {
+      this.editForm.reset({ isActive: false });
+    }
   }
   saveEdit() {
-    //const index = this.criteriaTable.findIndex(c => c.id === this.selectedCriteria.id);
-    //if (index !== -1) {
-    //  this.criteriaTable[index] = { ...this.selectedCriteria };
-    //}
-    this.displayEditDialog = false;
+    if (this.editForm.valid) {
+      const formValue = this.editForm.value;
+      console.log('Form Data:', formValue);
+
+      // 👉 send formValue to API here
+      this.displayEditDialog = false;
+    } else {
+      this.editForm.markAllAsTouched();
+    }
   }
 
   onDeleteCriteria(criteria: any) {
@@ -107,5 +128,7 @@ export class CriteriaComponent implements OnInit {
     console.log('Delete clicked:', criteria);
     // Your delete logic here
   }
+
+
 
 }
