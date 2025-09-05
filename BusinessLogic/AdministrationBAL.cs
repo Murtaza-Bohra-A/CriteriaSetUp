@@ -50,5 +50,24 @@ namespace CriteriaSetUp_BE.BusinessLogic
                 throw new Exception(ex.Message, ex);
             }
         }
+
+        public Result<List<CriteriaModule>> GetAvailModule(CriteriaModule req)
+        {
+            try
+            {
+                return new Result<List<CriteriaModule>>
+                {
+                    Status = true,
+                    Data = _dataService.GetAvailModule(req)
+
+                };
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+        }
+
+        
     }
 }

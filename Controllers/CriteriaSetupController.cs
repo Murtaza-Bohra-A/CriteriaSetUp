@@ -44,19 +44,19 @@ namespace CriteriaSetUp_BE.Controllers
             }
         }
 
-        //[HttpGet("GetAvailModule")]
-        //public IActionResult GetAvailModule(CriteriaStatus req)
-        //{
-        //    try
-        //    {
-        //        return Ok(_administrationBAL.GetAvailModule(req));
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // Log the exception or handle it as needed
-        //        return BadRequest(new Result<object> { Status = false, Message = ex.Message });
-        //    }
-        //}
+        [HttpGet("GetCriteriaModule")]
+        public IActionResult GetAvailModule(CriteriaModule req)
+        {
+            try
+            {
+                return Ok(_administrationBAL.GetAvailModule(req));
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it as needed
+                return BadRequest(new Result<object> { Status = false, Message = ex.Message });
+            }
+        }
     }
 }
 

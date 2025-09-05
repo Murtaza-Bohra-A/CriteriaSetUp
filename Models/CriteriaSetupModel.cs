@@ -3,7 +3,7 @@ namespace CriteriaSetUp_BE.Models
 {
     public class CriteriaModule
     {
-        public int? Id { get; set; }
+        public int? ID { get; set; }
         public string? Source { get; set; }
         public string? Criteria { get; set; }
     }
@@ -24,6 +24,13 @@ namespace CriteriaSetUp_BE.Models
         public string? FeatureName { get; set; }
         public string? CreatedBy { get; set; }
         public DateTime? CreatedDate { get; set; }
+    }
+    public class Criterilmodule 
+    {
+        public int? Id { get; set; }
+        public string? Source { get; set; }
+        public string? Criteria { get; set; }
+
     }
     public class Result<T>
     {

@@ -89,6 +89,43 @@ namespace CriteriaSetUp_BE.DataService
             } 
         }
 
+        public List<CriteriaModule> GetAvailModule(CriteriaModule req)
+        {
+            List<CriteriaModule> result = new List<CriteriaModule>();
+            string connectionString = _configuration.GetConnectionString("DefaultConnection");
+            //_configuration.GetConnectionString(_configuration.GetConnectionString("DefaultConnection"));
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("[dbo].[sp_CriteriaModule_Get]", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    //cmd.Parameters.AddWithValue("@ID", req.ID);
+                    //cmd.Parameters.AddWithValue("@CriteriaStatusID", req.CriteriaStatusID);
+                    //cmd.Parameters.AddWithValue("@Source", req.Source);
+                    //cmd.Parameters.AddWithValue("@StatusDescription", req.StatusDescription);
+
+                    con.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            CriteriaModule module = new CriteriaModule
+                            {
+                                ID = Convert.ToInt32(reader["ID"]),
+                                Source = reader["Source"].ToString(),
+                                Criteria = reader["Criteria"].ToString(),
+                                // Add all properties
+                            };
+                            result.Add(module);
+                        }
+  
+                return result;
+            }
+        }
+
+        
+
     }
 
 
